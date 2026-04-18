@@ -244,6 +244,29 @@ with d4:
     st.metric("Total Load",       f"{total_load_wh/1e6:,.1f} MWh")
 
 # -----------------------------
+# PLOTS
+# -----------------------------
+st.markdown("---")
+st.subheader("Generation Plot")
+fig1 = plot_generation(
+    datetimes=datetimes,
+    load_vals=load_vals,
+    solar_vals=solar_vals,
+    wind_vals=wind_vals,
+    baseload_vals=baseload_vals,
+    period_label=period_label,
+)
+st.pyplot(fig1)
+
+st.subheader("Battery State of Charge")
+fig2 = plot_battery(
+    datetimes=datetimes,
+    battery_trace=results["battery_trace"],
+    period_label=period_label,
+)
+st.pyplot(fig2)
+
+# -----------------------------
 # FINANCING RESULTS
 # -----------------------------
 st.markdown("---")
@@ -326,27 +349,4 @@ with sys2:
     st.metric("Blended System Cost per MWh Generated",
               f"${system_cost_per_mwh:,.2f}" if fy_total_kwh > 0 else "—",
               help="Total Annual Cost ÷ (Solar + Wind + Baseload full-year kWh) × 1,000")
-
-
-# -----------------------------
-# PLOTS
-# -----------------------------
-st.markdown("---")
-st.subheader("Generation Plot")
-fig1 = plot_generation(
-    datetimes=datetimes,
-    load_vals=load_vals,
-    solar_vals=solar_vals,
-    wind_vals=wind_vals,
-    baseload_vals=baseload_vals,
-    period_label=period_label,
-)
-st.pyplot(fig1)
-
-st.subheader("Battery State of Charge")
-fig2 = plot_battery(
-    datetimes=datetimes,
-    battery_trace=results["battery_trace"],
-    period_label=period_label,
-)
 st.pyplot(fig2)
