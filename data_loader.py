@@ -1,6 +1,9 @@
+
 import openpyxl
+import streamlit as st
 
 
+@st.cache_data
 def load_8760_data(filename, month=None):
     """
     Load hourly load, solar, and wind data from the 8760 sheet.
