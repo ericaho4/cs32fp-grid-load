@@ -1,5 +1,8 @@
 import streamlit as st
+import os
 from data_loader import load_8760_data
+
+HERE = os.path.dirname(os.path.abspath(__file__))
 from simulator import simulate_grid
 from visualize import plot_generation, plot_battery
 
@@ -109,7 +112,7 @@ baseload_capex_per_kw = st.sidebar.number_input(
 # -----------------------------
 # LOAD DATA
 # -----------------------------
-filename = "Boston Renewables Model 2026.xlsx"
+filename = os.path.join(HERE, "Boston Renewables Model 2026.xlsx")
 
 if run_full_year:
     datetimes, load_vals, raw_solar_vals, raw_wind_vals = load_8760_data(filename, month=None)
