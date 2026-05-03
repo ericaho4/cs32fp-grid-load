@@ -352,4 +352,3 @@ with sys2:
     st.metric("Blended System Cost per MWh Generated",
               f"${system_cost_per_mwh:,.2f}" if fy_total_kwh > 0 else "—",
               help="Total Annual Cost ÷ (Solar + Wind + Baseload full-year kWh) × 1,000")
-st.pyplot(fig2)
